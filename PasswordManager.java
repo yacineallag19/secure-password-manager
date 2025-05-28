@@ -17,7 +17,7 @@ public class PasswordManager {
   private static Map < String, String > passwordStore = new HashMap < > ();
 
   public static void main(String[] args) throws Exception {
-  
+
     if (!isRoot()) {
       System.err.println("Error: Must be run as root.");
       return;
@@ -194,7 +194,7 @@ public class PasswordManager {
     SecureRandom rnd = new SecureRandom(seed);
 
     StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 50; i++) {
       int v = Math.floorMod(rnd.nextInt(), 128);
       if (v < 32) v += 33;
       sb.append((char) v);
@@ -209,18 +209,18 @@ public class PasswordManager {
 
     System.out.println("Saved entries:");
     for (String key : passwordStore.keySet()) {
-        System.out.println(" - " + key); 
+        System.out.println(" - " + key);
     }
   }
 
   private static void zeroOut(byte[] b) {
     if (b != null) Arrays.fill(b, (byte) 0);
   }
-  
+
   private static void zeroOut(char[] c) {
     if (c != null) Arrays.fill(c, '\0');
   }
-  
+
   private static boolean isRoot() {
     return "root".equals(System.getProperty("user.name"));
   }
